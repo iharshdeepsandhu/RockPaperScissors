@@ -1,0 +1,54 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+body{
+    background-color: darkgray;
+}
+.heading{
+    text-align: center;
+    padding: 50px;
+}
+.instructions{
+    text-align: center;
+}
+.divButtons{
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 50px;
+
+}
+.btn{
+    padding: 40px;
+    border-radius: 5px;
+    border: none;
+    font-size: 30px;
+    background:none;    
+
+}
+.divScore{
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    
+}
+.scoreBoard{
+    padding: 0px 50px 0px 50px;
+}
+.scoreBoard h3, .scoreBoard h2{
+    text-align: center;
+    padding: 10px;
+    
+}
+#choices h3{
+    text-align: left;
+}
+.btn:hover {
+    background:none;
+    scale:2.5;
+    /* border: rgb(85, 85, 12) 3px solid; */
+    transition: .2s;
+    color: white;
+}

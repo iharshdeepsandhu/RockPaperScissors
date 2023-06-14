@@ -1,65 +1,122 @@
 let userWin = 0;
-    let computerWin = 0;
-function playRound () {
-    
-    let user = prompt("Select your choice\(Rock, Paper or Scissors\) :");
-    let userChoice = (user.charAt(0)).toUpperCase() + (user.substring(1)).toLowerCase();
-    let computerChoice = getComputeChoice();
-    console.log('you chose : ' + userChoice);
-    console.log('computer chose :'+computerChoice);
+let computerWin = 0;
 
-let actualResult = check(userChoice, computerChoice);
-console.log(actualResult);
+
+
+function getUserChoice(userChoice) {
+
+    
+    let computerChoice = getComputerChoice();
+    
+    
+    let yourChoice = document.querySelector('#yourChoice');
+    let docComputerChoice = document.querySelector('#computerChoice')
+    yourChoice.innerHTML = `Player:  ${settingStickers(userChoice)}`;
+    docComputerChoice.innerHTML = `Computer:  ${settingStickers(computerChoice)}`
+    let actualResult = check(userChoice, computerChoice);
+    
+  
+   
+
 }
-function getComputeChoice(){
-    let choice = Math.floor(Math.random() * 3);
-    let a;
-    if (choice == 0)
-        a = 'Rock';
-    if (choice == 1)
-        a = 'Scissors';
-    if (choice == 2)
-        a = 'Paper';    
-    return a;
+
+function getComputerChoice() {
+    let randomNumber = Math.floor(Math.random() * 3)
+    switch (randomNumber) {
+        case 0:
+        return 'ROCK'
+        case 1:
+        return 'PAPER'
+        case 2:
+        return 'SCISSORS'
+    }
+}
+
+function settingStickers(userChoice) {
+let st='';
+switch(userChoice){
+    case 'ROCK':
+        return '<i class="fa-solid fa-hand-back-fist"></i>';
+    case 'SCISSORS':
+        return '<i class="fa-solid fa-hand-scissors">';
+    case 'PAPER':
+        return '<i class="fa-solid fa-hand"></i>'
+}
 }
 function check(u, c){
     let result;
     
-    if ((u == 'Rock' && c == 'Rock') || (u == 'Scissors' && c == 'Scissors') || (u == 'Paper' && c == 'Paper'))
+    if ((u == 'ROCK' && c == 'ROCK') || (u == 'SCISSORS' && c == 'SCISSORS') || (u == 'PAPER' && c == 'PAPER')){
         result  = 'Tie';
-    else if ((u == 'Rock' && c == 'Scissors') || (u == 'Scissors' && c == 'Paper') || (u == 'Paper' && c == 'Rock')) {
+        
+    }
+        
+    else if ((u == 'ROCK' && c == 'SCISSORS') || (u == 'SCISSORS' && c == 'PAPER') || (u == 'PAPER' && c == 'ROCK')) {
         result = 'you won!';
-        userWin ++;
+        ++userWin;
+        if(isGameOver()){
+            
+            alert('Congratulations. You won!')
+            userWin = 0;
+            computerWin = 0;
+            computerScoreBoard.textContent = computerWin;
+            
+        }
+        let userScoreBoard = document.querySelector('#userScoreBoard');
+        userScoreBoard.textContent = userWin;
        
         
     }
-    else if ((u == 'Rock' && c == 'Paper') || (u == 'Scissors' && c == 'Rock') || (u == 'Paper' && c == 'Scissors')) {
+    else if ((u == 'ROCK' && c == 'PAPER') || (u == 'SCISSORS' && c == 'ROCK') || (u == 'PAPER' && c == 'SCISSORS')) {
         result = 'you lose!';
-        computerWin ++;
+        ++computerWin;
+        if(isGameOver()){
+            
+            alert('you lost the game ');
+            userWin = 0;
+            computerWin = 0;
+            userScoreBoard.textContent = userWin;
+            
+        }
+        let computerScoreBoard = document.querySelector('#computerScoreBoard');
+        computerScoreBoard.textContent = computerWin;
     }
-    else
-        result = 'something went wrong';
-    return result;
-}
-
-function game(){
-    let round = 1;
-    for(let i = 0; i<5; i++) {
-        console.log('round no: '+ round);
-        playRound();
-        if(userWin == 3){
-            print("you won the game! congrats.");
-            break;
-        }
-        if (computerWin== 3){
-            print("you lose! Better luck next time");
-            break;
-        }
-        round ++
+   
         
-    }
+
+    let resultBoard = document.querySelector('#resultBoard');
+    resultBoard.textContent =result;
+    return result;
+
+    
 }
 
-console.log("Starting the game");
-console.log("This is Rock Paper Scissors Game");
-game();
+
+function isGameOver() {
+    if(userWin >= 5 || computerWin >= 5){
+        return true;
+    }
+else return false;
+     
+}
+function game() {
+    
+        let btnRock = document.querySelector('#btnRock');
+        let btnPaper = document.querySelector('#btnPaper');
+        let btnScissors = document.querySelector('#btnScissors');
+
+        btnPaper.addEventListener('click', () => getUserChoice('PAPER'));
+        btnRock.addEventListener('click', () => getUserChoice('ROCK'));
+        btnScissors.addEventListener('click', () => getUserChoice('SCISSORS'));
+    
+    
+}
+
+    game();
+    
+    
+
+
+
+   
+
